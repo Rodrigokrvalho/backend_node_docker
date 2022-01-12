@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  antunes_database:
+    image: postgres
+    container_name: antunes_database
+    restart: always
+    ports: 
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=antunes
+      - POSTGRES_PASSWORD=antunestransportes
+      - POSTGRES_DB=antunes_database
+    volumes:
+      - pgdata:/data/postgres
+    
+  app:
+    build: .
+    container_name: antunes-backend
+    ports:
+      - 8081:8081
+    volumes:
+      - .:/usr/app
+    command: npm run dev
+
+volumes:
+  pgdata:
+    driver: local
+    
