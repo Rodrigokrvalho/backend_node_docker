@@ -51,6 +51,12 @@ class InspectionsRepository implements IInpectionsRepository {
     const date = new Date()
     await this.repository.update(id, { updated_at: date.toISOString(), unfinished: false })
   }
+
+  async findInspectionsByDate (date_start: Date, date_end: Date): Promise<Inspections[]> {
+    const inspections = await this.repository.createQueryBuilder('next_inspection').where('next_inspection >= :date_start', { date_start }).andWhere('next_inspection < :date_end', { date_end }).getMany()
+
+    return inspections
+  }
 }
 
 export { InspectionsRepository }
