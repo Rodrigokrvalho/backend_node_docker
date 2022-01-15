@@ -5,6 +5,7 @@ import { IInpectionsRepository } from '../../repositories/IInspectionsRepository
 interface IRequest {
   date_start: Date
   date_end: Date
+  unfinished: Boolean
 }
 
 @injectable()
@@ -14,8 +15,8 @@ class FindInspectionsByDateUseCase {
     private inspectionsRepository: IInpectionsRepository
   ) {}
 
-  execute ({ date_start, date_end }:IRequest): Promise<Inspections[]> {
-    const inspections = this.inspectionsRepository.findInspectionsByDate(date_start, date_end)
+  execute ({ date_start, date_end, unfinished }:IRequest): Promise<Inspections[]> {
+    const inspections = this.inspectionsRepository.findInspectionsByDate(date_start, date_end, unfinished)
 
     return inspections
   }

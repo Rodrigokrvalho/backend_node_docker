@@ -22,7 +22,7 @@ interface IInpectionsRepository {
   findById(id: string): Promise<Inspections>
   findOneInspectionByVehicle(vehicle_board: string, inspection_name: string): Promise<Inspections>
   updateUnfinishedInspection(id: string): Promise<void>
-  findInspectionsByDate(date_start: Date, date_end: Date): Promise<Inspections[]>
+  findInspectionsByDate(date_start: Date, date_end: Date, unfinished: Boolean): Promise<Inspections[]>
 }
 
 export { IInpectionsRepository, ICreateInspectionDTO }

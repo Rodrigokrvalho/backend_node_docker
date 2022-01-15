@@ -58,7 +58,7 @@ class StorageRepository implements IStorageRepository {
   }
 
   async findAllByDescription (description: string): Promise<Storage[]> {
-    const itens = await this.repository.createQueryBuilder('description').where('description like :description', { description: `%${description}%` })
+    const itens = await this.repository.createQueryBuilder('description').where('description like :description', { description: `%${description.replace(' ', '%')}%` })
       .getMany()
 
     return itens
